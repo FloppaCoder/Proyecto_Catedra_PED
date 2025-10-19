@@ -139,7 +139,7 @@
             textBox1.Size = new Size(1264, 29);
             textBox1.TabIndex = 1;
             textBox1.TabStop = false;
-            textBox1.Text = "Gestion de Turnos";
+            textBox1.Text = "Sistema de Gestion de Turnos";
             textBox1.TextAlign = HorizontalAlignment.Center;
             // 
             // groupBox2
@@ -223,6 +223,7 @@
             button1.TabIndex = 2;
             button1.Text = "Registrar Paciente";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
