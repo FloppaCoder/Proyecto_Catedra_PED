@@ -92,7 +92,7 @@
             groupBox1.Size = new Size(1127, 245);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Cola Prioritaria";
+            groupBox1.Text = "Cola Urgencias";
             // 
             // tableLayoutPanel1
             // 
