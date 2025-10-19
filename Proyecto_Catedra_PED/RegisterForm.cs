@@ -7,9 +7,6 @@ namespace WinFormsApp1
     {
         public RegisterForm()
         {
-            //// Formulario en blanco — sin controles.
-            //this.StartPosition = FormStartPosition.CenterParent;
-            //this.ClientSize = new Size(400, 300);
             InitializeComponent();
         }
 

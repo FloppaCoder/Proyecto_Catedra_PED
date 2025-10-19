@@ -1,3 +1,4 @@
+using Proyecto_Catedra_PED;
 using System;
 using System.Windows.Forms;
 
@@ -17,9 +18,14 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Abrir el formulario RegisterForm (en blanco)
             var registerForm = new RegisterForm();
             registerForm.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var queuesForm = new QueuesForm();
+            queuesForm.Show();
         }
     }
 }
