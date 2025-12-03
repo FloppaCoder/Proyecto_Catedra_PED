@@ -13,17 +13,12 @@ namespace WinFormsApp1
         {
             InitializeComponent();
 
-            // 1. CONFIGURACIÓN INICIAL
             ConfigurarTimer();
 
-            // 2. CONEXIÓN MANUAL DE BOTONES
-            // Como el Designer no tiene los eventos "Click" asignados para estos botones,
-            // los asignamos aquí por código.
-            this.button3.Click += new EventHandler(btnSalir_Click);      // Botón Salir
-            this.button4.Click += new EventHandler(btnHistorial_Click);  // Botón Historial
-            this.button5.Click += new EventHandler(btnAtender_Click);    // Botón Atender Siguiente
-            this.button7.Click += new EventHandler(btnLimpiar_Click);    // Botón Limpiar/Finalizar
-            // this.button6.Click += ... // Pausar (si decides implementarlo)
+            this.button3.Click += new EventHandler(btnSalir_Click); 
+            this.button4.Click += new EventHandler(btnHistorial_Click); 
+            this.button5.Click += new EventHandler(btnAtender_Click); 
+            this.btnLimpiarColas.Click += new EventHandler(btnLimpiar_Click);
         }
 
         // --- CONFIGURACIÓN DEL TIMER ---
@@ -48,39 +43,31 @@ namespace WinFormsApp1
         // --- ACTUALIZACIÓN DE INTERFAZ ---
         private void ActualizarEstadisticas()
         {
-            // Obtenemos los datos del Singleton
             var estado = TurnManager.Instance.ObtenerEstadoActual();
-
-            // Usamos los nombres EXACTOS de tu Form1.Designer.cs (TextPendientes, TextUrgentes, etc.)
             TextPendientes.Text = estado.Pendientes.ToString();
             TextUrgentes.Text = estado.Urgentes.ToString();
             TextAtendidos.Text = estado.Atendidos.ToString();
         }
 
         // --- EVENTOS DE BOTONES ---
-
-        // Botón 1: Registrar (Ya venía conectado en el Designer)
         private void button1_Click(object sender, EventArgs e)
         {
             var registerForm = new RegisterForm();
-            registerForm.ShowDialog(); // ShowDialog es mejor para registros, bloquea la ventana de atrás
-            ActualizarEstadisticas(); // Forzar actualización al cerrar
+            registerForm.ShowDialog();
+            ActualizarEstadisticas();
         }
 
-        // Botón 2: Ver Colas (Ya venía conectado en el Designer)
         private void button2_Click(object sender, EventArgs e)
         {
             var queuesForm = new QueuesForm();
             queuesForm.Show();
         }
 
-        // Botón 3: Salir (Conectado manualmente arriba)
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        // Botón 4: Historial (Conectado manualmente arriba)
         private void btnHistorial_Click(object sender, EventArgs e)
         {
             // Si ya creaste HistoryForm, descomenta esto:
@@ -89,7 +76,6 @@ namespace WinFormsApp1
             MessageBox.Show("Aquí se mostrará el historial completo.");
         }
 
-        // Botón 5: Atender Siguiente (Conectado manualmente arriba)
         private void btnAtender_Click(object sender, EventArgs e)
         {
             var turno = TurnManager.Instance.AtenderSiguiente();
@@ -105,16 +91,27 @@ namespace WinFormsApp1
             }
         }
 
-        // Botón 7: Limpiar Colas / Finalizar Turno (Conectado manualmente arriba)
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            // Asumimos que este botón finaliza el turno actual
+
+        }
+
+        private void groupBox1_Enter_1(object sender, EventArgs e) { }
+
+        private void btnTerminarConsulta_Click(object sender, EventArgs e)
+        {
             TurnManager.Instance.FinalizarTurnoActual();
             MessageBox.Show("Atención finalizada correctamente.");
             ActualizarEstadisticas();
         }
 
-        // Eventos vacíos del diseñador (déjalos para evitar errores)
-        private void groupBox1_Enter_1(object sender, EventArgs e) { }
+        private void btnLimpiarColas_Click(object sender, EventArgs e)
+        {
+            DatabaseHelper.ClearQueues();
+            TurnManager turnManager = TurnManager.Instance;
+
+            turnManager.ReconstruirColasDesdeBD();
+            MessageBox.Show("Colas limpiadas correctamente.");
+        }
     }
 }

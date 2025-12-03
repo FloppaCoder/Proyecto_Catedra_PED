@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.Data.Sqlite; 
+﻿using Microsoft.Data.Sqlite; 
 using Proyecto_Catedra_PED.Models;
 using Proyecto_Catedra_PED.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 
 namespace Proyecto_Catedra_PED
 {
@@ -45,7 +46,6 @@ namespace Proyecto_Catedra_PED
 
                 using (var command = new SqliteCommand(sql, connection))
                 {
-                    //command.Parameters.AddWithValue("@id", visit.TurnId);
                     command.Parameters.AddWithValue("@nom", visit.Patient.Nombre);
                     command.Parameters.AddWithValue("@mot", visit.Patient.Motivo);
                     command.Parameters.AddWithValue("@tipo", (int)visit.Patient.TipoCaso);
@@ -116,6 +116,67 @@ namespace Proyecto_Catedra_PED
                 }
             }
             return list;
+        }
+
+        public static List<PatientVisit> LoadAttendedVisits()
+        {
+            var list = new List<PatientVisit>();
+            if (!File.Exists(DbName)) return list;
+
+            using (var connection = new SqliteConnection(ConnectionString))
+            {
+                connection.Open();
+                string sql = "SELECT * FROM PatientVisits WHERE Estado = 2 ORDER BY HoraIngreso ASC";
+
+                using (var command = new SqliteCommand(sql, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var p = new Patient(
+                                reader["Nombre"].ToString(),
+                                reader["Motivo"].ToString(),
+                                (TipoCaso)Convert.ToInt32(reader["TipoCaso"])
+                            );
+
+                            var visit = new PatientVisit(Convert.ToInt32(reader["TurnId"]), p);
+                            visit.Estado = (EstadoTurno)Convert.ToInt32(reader["Estado"]);
+                            visit.HoraIngreso = DateTime.Parse(reader["HoraIngreso"].ToString());
+
+                            if (reader["HoraInicioAtencion"] != DBNull.Value)
+                            {
+                                visit.HoraInicioAtencion = DateTime.Parse(reader["HoraInicioAtencion"].ToString());
+                            }
+                            list.Add(visit);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+    
+        public static void ClearQueues()
+        {
+            using (var connection = new SqliteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string sql = @"UPDATE PatientVisits 
+                       SET Estado = 2, 
+                           HoraInicioAtencion = COALESCE(HoraInicioAtencion, @ahora), 
+                           HoraFinAtencion = @ahora 
+                       WHERE Estado IN (0, 1)";
+
+                using (var command = new SqliteCommand(sql, connection))
+                {
+                    string horaActual = DateTime.Now.ToString("o");
+
+                    command.Parameters.AddWithValue("@ahora", horaActual);
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

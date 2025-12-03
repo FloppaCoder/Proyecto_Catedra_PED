@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            TextAtendidos = new TextBox();
+            TextUrgentes = new TextBox();
+            TextPendientes = new TextBox();
             lblAtendidos = new Label();
             lblUrgentes = new Label();
             lblPendientes = new Label();
             textBox1 = new TextBox();
             groupBox2 = new GroupBox();
-            button7 = new Button();
-            button6 = new Button();
+            btnTerminarConsulta = new Button();
+            btnLimpiarColas = new Button();
             button5 = new Button();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
-            TextUrgentes = new TextBox();
-            TextAtendidos = new TextBox();
-            TextPendientes = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -58,40 +58,68 @@
             groupBox1.Controls.Add(lblPendientes);
             groupBox1.Font = new Font("Segoe UI", 16F);
             groupBox1.ForeColor = Color.FromArgb(0, 172, 177);
-            groupBox1.Location = new Point(233, 260);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Location = new Point(204, 195);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(446, 437);
+            groupBox1.Size = new Size(390, 328);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Estadisticas";
             groupBox1.Enter += groupBox1_Enter_1;
             // 
+            // TextAtendidos
+            // 
+            TextAtendidos.BackColor = SystemColors.Control;
+            TextAtendidos.BorderStyle = BorderStyle.None;
+            TextAtendidos.Enabled = false;
+            TextAtendidos.Location = new Point(173, 152);
+            TextAtendidos.Name = "TextAtendidos";
+            TextAtendidos.Size = new Size(100, 29);
+            TextAtendidos.TabIndex = 5;
+            // 
+            // TextUrgentes
+            // 
+            TextUrgentes.BackColor = SystemColors.Control;
+            TextUrgentes.BorderStyle = BorderStyle.None;
+            TextUrgentes.Enabled = false;
+            TextUrgentes.Location = new Point(173, 106);
+            TextUrgentes.Name = "TextUrgentes";
+            TextUrgentes.Size = new Size(100, 29);
+            TextUrgentes.TabIndex = 4;
+            // 
+            // TextPendientes
+            // 
+            TextPendientes.BackColor = SystemColors.Control;
+            TextPendientes.BorderStyle = BorderStyle.None;
+            TextPendientes.Enabled = false;
+            TextPendientes.Location = new Point(173, 61);
+            TextPendientes.Name = "TextPendientes";
+            TextPendientes.Size = new Size(100, 29);
+            TextPendientes.TabIndex = 3;
+            // 
             // lblAtendidos
             // 
             lblAtendidos.AutoSize = true;
-            lblAtendidos.Location = new Point(35, 203);
+            lblAtendidos.Location = new Point(31, 152);
             lblAtendidos.Name = "lblAtendidos";
-            lblAtendidos.Size = new Size(138, 37);
+            lblAtendidos.Size = new Size(111, 30);
             lblAtendidos.TabIndex = 2;
             lblAtendidos.Text = "Atendidos";
             // 
             // lblUrgentes
             // 
             lblUrgentes.AutoSize = true;
-            lblUrgentes.Location = new Point(35, 140);
+            lblUrgentes.Location = new Point(31, 105);
             lblUrgentes.Name = "lblUrgentes";
-            lblUrgentes.Size = new Size(130, 37);
+            lblUrgentes.Size = new Size(106, 30);
             lblUrgentes.TabIndex = 1;
             lblUrgentes.Text = "Urgentes:";
             // 
             // lblPendientes
             // 
             lblPendientes.AutoSize = true;
-            lblPendientes.Location = new Point(35, 85);
+            lblPendientes.Location = new Point(31, 64);
             lblPendientes.Name = "lblPendientes";
-            lblPendientes.Size = new Size(152, 37);
+            lblPendientes.Size = new Size(123, 30);
             lblPendientes.TabIndex = 0;
             lblPendientes.Text = "Pendientes:";
             // 
@@ -104,10 +132,9 @@
             textBox1.ForeColor = Color.White;
             textBox1.HideSelection = false;
             textBox1.Location = new Point(0, 0);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new Size(1445, 36);
+            textBox1.Size = new Size(1264, 29);
             textBox1.TabIndex = 1;
             textBox1.TabStop = false;
             textBox1.Text = "Sistema de Gestion de Turnos";
@@ -115,55 +142,53 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(button7);
-            groupBox2.Controls.Add(button6);
+            groupBox2.Controls.Add(btnTerminarConsulta);
+            groupBox2.Controls.Add(btnLimpiarColas);
             groupBox2.Controls.Add(button5);
             groupBox2.Font = new Font("Segoe UI", 16F);
             groupBox2.ForeColor = Color.FromArgb(0, 172, 177);
-            groupBox2.Location = new Point(771, 260);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Location = new Point(675, 195);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(446, 437);
+            groupBox2.Size = new Size(390, 328);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Gestion de Turnos";
             // 
-            // button7
+            // btnTerminarConsulta
             // 
-            button7.BackColor = Color.FromArgb(0, 172, 177);
-            button7.FlatAppearance.BorderColor = Color.FromArgb(0, 172, 177);
-            button7.FlatAppearance.BorderSize = 0;
-            button7.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 172, 177);
-            button7.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 172, 177);
-            button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Segoe UI", 14F);
-            button7.ForeColor = Color.White;
-            button7.Location = new Point(115, 309);
-            button7.Margin = new Padding(3, 4, 3, 4);
-            button7.Name = "button7";
-            button7.Size = new Size(232, 59);
-            button7.TabIndex = 8;
-            button7.Text = "Limpiar Colas";
-            button7.UseVisualStyleBackColor = false;
+            btnTerminarConsulta.BackColor = Color.FromArgb(0, 172, 177);
+            btnTerminarConsulta.FlatAppearance.BorderColor = Color.FromArgb(0, 172, 177);
+            btnTerminarConsulta.FlatAppearance.BorderSize = 0;
+            btnTerminarConsulta.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 172, 177);
+            btnTerminarConsulta.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 172, 177);
+            btnTerminarConsulta.FlatStyle = FlatStyle.Flat;
+            btnTerminarConsulta.Font = new Font("Segoe UI", 14F);
+            btnTerminarConsulta.ForeColor = Color.White;
+            btnTerminarConsulta.Location = new Point(95, 132);
+            btnTerminarConsulta.Name = "btnTerminarConsulta";
+            btnTerminarConsulta.Size = new Size(203, 44);
+            btnTerminarConsulta.TabIndex = 9;
+            btnTerminarConsulta.Text = "Terminar Consulta";
+            btnTerminarConsulta.UseVisualStyleBackColor = false;
+            btnTerminarConsulta.Click += btnTerminarConsulta_Click;
             // 
-            // button6
+            // btnLimpiarColas
             // 
-            button6.BackColor = Color.FromArgb(0, 172, 177);
-            button6.FlatAppearance.BorderColor = Color.FromArgb(0, 172, 177);
-            button6.FlatAppearance.BorderSize = 0;
-            button6.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 172, 177);
-            button6.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 172, 177);
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Segoe UI", 14F);
-            button6.ForeColor = Color.White;
-            button6.Location = new Point(115, 195);
-            button6.Margin = new Padding(3, 4, 3, 4);
-            button6.Name = "button6";
-            button6.Size = new Size(232, 59);
-            button6.TabIndex = 7;
-            button6.Text = "Pausar Turno";
-            button6.UseVisualStyleBackColor = false;
+            btnLimpiarColas.BackColor = Color.FromArgb(0, 172, 177);
+            btnLimpiarColas.FlatAppearance.BorderColor = Color.FromArgb(0, 172, 177);
+            btnLimpiarColas.FlatAppearance.BorderSize = 0;
+            btnLimpiarColas.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 172, 177);
+            btnLimpiarColas.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 172, 177);
+            btnLimpiarColas.FlatStyle = FlatStyle.Flat;
+            btnLimpiarColas.Font = new Font("Segoe UI", 14F);
+            btnLimpiarColas.ForeColor = Color.White;
+            btnLimpiarColas.Location = new Point(95, 200);
+            btnLimpiarColas.Name = "btnLimpiarColas";
+            btnLimpiarColas.Size = new Size(203, 44);
+            btnLimpiarColas.TabIndex = 8;
+            btnLimpiarColas.Text = "Limpiar Colas";
+            btnLimpiarColas.UseVisualStyleBackColor = false;
+            btnLimpiarColas.Click += btnLimpiarColas_Click;
             // 
             // button5
             // 
@@ -175,10 +200,9 @@
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 14F);
             button5.ForeColor = Color.White;
-            button5.Location = new Point(115, 85);
-            button5.Margin = new Padding(3, 4, 3, 4);
+            button5.Location = new Point(95, 64);
             button5.Name = "button5";
-            button5.Size = new Size(232, 59);
+            button5.Size = new Size(203, 44);
             button5.TabIndex = 6;
             button5.Text = "Atender Siguiente";
             button5.UseVisualStyleBackColor = false;
@@ -193,10 +217,9 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 14F);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(177, 101);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(155, 76);
             button1.Name = "button1";
-            button1.Size = new Size(232, 59);
+            button1.Size = new Size(203, 44);
             button1.TabIndex = 2;
             button1.Text = "Registrar Paciente";
             button1.UseVisualStyleBackColor = false;
@@ -212,10 +235,9 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 14F);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(447, 101);
-            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Location = new Point(391, 76);
             button2.Name = "button2";
-            button2.Size = new Size(232, 59);
+            button2.Size = new Size(203, 44);
             button2.TabIndex = 3;
             button2.Text = "Ver Colas";
             button2.UseVisualStyleBackColor = false;
@@ -231,10 +253,9 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 14F);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(1041, 101);
-            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Location = new Point(911, 76);
             button3.Name = "button3";
-            button3.Size = new Size(232, 59);
+            button3.Size = new Size(203, 44);
             button3.TabIndex = 5;
             button3.Text = "Salir";
             button3.UseVisualStyleBackColor = false;
@@ -249,52 +270,18 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI", 14F);
             button4.ForeColor = Color.White;
-            button4.Location = new Point(771, 101);
-            button4.Margin = new Padding(3, 4, 3, 4);
+            button4.Location = new Point(675, 76);
             button4.Name = "button4";
-            button4.Size = new Size(232, 59);
+            button4.Size = new Size(203, 44);
             button4.TabIndex = 4;
             button4.Text = "Historial";
             button4.UseVisualStyleBackColor = false;
             // 
-            // TextUrgentes
-            // 
-            TextUrgentes.BackColor = SystemColors.Control;
-            TextUrgentes.BorderStyle = BorderStyle.None;
-            TextUrgentes.Enabled = false;
-            TextUrgentes.Location = new Point(198, 141);
-            TextUrgentes.Margin = new Padding(3, 4, 3, 4);
-            TextUrgentes.Name = "TextUrgentes";
-            TextUrgentes.Size = new Size(114, 36);
-            TextUrgentes.TabIndex = 4;
-            // 
-            // TextAtendidos
-            // 
-            TextAtendidos.BackColor = SystemColors.Control;
-            TextAtendidos.BorderStyle = BorderStyle.None;
-            TextAtendidos.Enabled = false;
-            TextAtendidos.Location = new Point(198, 203);
-            TextAtendidos.Margin = new Padding(3, 4, 3, 4);
-            TextAtendidos.Name = "TextAtendidos";
-            TextAtendidos.Size = new Size(114, 36);
-            TextAtendidos.TabIndex = 5;
-            // 
-            // TextPendientes
-            // 
-            TextPendientes.BackColor = SystemColors.Control;
-            TextPendientes.BorderStyle = BorderStyle.None;
-            TextPendientes.Enabled = false;
-            TextPendientes.Location = new Point(198, 81);
-            TextPendientes.Margin = new Padding(3, 4, 3, 4);
-            TextPendientes.Name = "TextPendientes";
-            TextPendientes.Size = new Size(114, 36);
-            TextPendientes.TabIndex = 3;
-            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1445, 908);
+            ClientSize = new Size(1264, 681);
             Controls.Add(button3);
             Controls.Add(button4);
             Controls.Add(button2);
@@ -302,7 +289,6 @@
             Controls.Add(groupBox2);
             Controls.Add(textBox1);
             Controls.Add(groupBox1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Sistema de Gestion de Turnos";
             Load += Form1_Load;
@@ -326,10 +312,10 @@
         private Label lblUrgentes;
         private Label lblPendientes;
         private Button button5;
-        private Button button7;
-        private Button button6;
+        private Button btnLimpiarColas;
         private TextBox TextAtendidos;
         private TextBox TextUrgentes;
         private TextBox TextPendientes;
+        private Button btnTerminarConsulta;
     }
 }

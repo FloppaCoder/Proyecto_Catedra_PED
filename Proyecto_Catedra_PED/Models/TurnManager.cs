@@ -25,7 +25,7 @@ namespace Proyecto_Catedra_PED
             Historial = new List<PatientVisit>();
 
             DatabaseHelper.InitializeDatabase();
-            //ReconstruirColasDesdeBD();
+            ReconstruirColasDesdeBD();
         }
 
         public static TurnManager Instance
@@ -55,7 +55,7 @@ namespace Proyecto_Catedra_PED
             }
         }
 
-        public PatientVisit AtenderSiguiente()
+        public PatientVisit AtenderSiguiente(Boolean isUrgente = true)
         {
             lock (_lock)
             {
@@ -63,9 +63,9 @@ namespace Proyecto_Catedra_PED
 
                 PatientVisit siguiente = null;
 
-                if (ColaUrgencias.Count > 0)
+                if (ColaUrgencias.Count > 0 && isUrgente)
                     siguiente = ColaUrgencias.Dequeue();
-                else if (ColaGeneral.Count > 0)
+                else if (ColaGeneral.Count > 0 && !isUrgente)
                     siguiente = ColaGeneral.Dequeue();
 
                 if (siguiente != null)
@@ -97,6 +97,30 @@ namespace Proyecto_Catedra_PED
             lock (_lock)
             {
                 return (ColaGeneral.Count, ColaUrgencias.Count, Historial.Count);
+            }
+        }
+
+        public void ReconstruirColasDesdeBD()
+        {
+            lock (_lock)
+            {
+                ColaUrgencias.Clear();
+                ColaGeneral.Clear();
+                Historial.Clear();
+
+                var visitasPendientes = DatabaseHelper.LoadPendingVisits();
+                foreach (var visita in visitasPendientes)
+                {
+                    if (visita.Patient.TipoCaso == TipoCaso.Urgente)
+                        ColaUrgencias.Enqueue(visita);
+                    else
+                        ColaGeneral.Enqueue(visita);
+                    if (visita.TurnId >= _contadorTurnos)
+                        _contadorTurnos = visita.TurnId + 1;
+                }
+
+                var visitasAtendidas = DatabaseHelper.LoadAttendedVisits();
+                Historial.AddRange(visitasAtendidas);
             }
         }
     }
