@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Proyecto_Catedra_PED.Models.Enums
 {
     public enum TipoCaso
-    {s
+    {
         Regular,
         Urgente
     }
