@@ -19,7 +19,22 @@ namespace Proyecto_Catedra_PED
 
         private void HistoryForm_Load(object sender, EventArgs e)
         {
-            
+            CargarHistorial();
+        }
+
+        private void CargarHistorial()
+        {
+            dataGridViewHistorial.Rows.Clear();
+
+            foreach (var turno in TurnManager.Instance.Historial)
+            {
+                dataGridViewHistorial.Rows.Add(
+                    turno.TurnId,
+                    turno.Patient.Nombre,
+                    turno.Patient.Motivo,
+                    turno.HoraIngreso.ToString("HH:mm")
+                );
+            }
         }
     }
 }
