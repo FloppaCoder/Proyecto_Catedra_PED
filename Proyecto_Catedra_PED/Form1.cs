@@ -70,10 +70,8 @@ namespace WinFormsApp1
 
         private void btnHistorial_Click(object sender, EventArgs e)
         {
-            // Si ya creaste HistoryForm, descomenta esto:
-            // var historyForm = new HistoryForm();
-            // historyForm.Show();
-            MessageBox.Show("Aquí se mostrará el historial completo.");
+            var historyForm = new HistoryForm();
+            historyForm.Show();
         }
 
         private void btnAtender_Click(object sender, EventArgs e)
